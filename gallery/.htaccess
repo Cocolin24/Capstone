@@ -1,0 +1,38 @@
+# Allow image files to be served but prevent directory browsing
+Options -Indexes
+
+# Only allow image files
+<Files "*">
+    Order Allow,Deny
+    Deny from all
+</Files>
+
+<Files "*.jpg">
+    Order Allow,Deny
+    Allow from all
+</Files>
+
+<Files "*.jpeg">
+    Order Allow,Deny
+    Allow from all
+</Files>
+
+<Files "*.png">
+    Order Allow,Deny
+    Allow from all
+</Files>
+
+<Files "*.gif">
+    Order Allow,Deny
+    Allow from all
+</Files>
+
+<Files "*.webp">
+    Order Allow,Deny
+    Allow from all
+</Files>
+
+<Files "*.jfif">
+    Order Allow,Deny
+    Allow from all
+</Files>

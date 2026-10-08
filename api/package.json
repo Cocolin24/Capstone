@@ -1,0 +1,15 @@
+{
+  "name": "realpain-email-server",
+  "version": "1.0.0",
+  "description": "Email verification server for Real Pain Tattoo Studio",
+  "main": "send-email-server.js",
+  "scripts": {
+    "start": "node send-email-server.js"
+  },
+  "dependencies": {
+    "nodemailer": "^6.9.0"
+  },
+  "keywords": ["email", "smtp", "verification"],
+  "author": "Real Pain Tattoo Studio",
+  "license": "ISC"
+}

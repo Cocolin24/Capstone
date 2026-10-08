@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <title>Gallery | Real Pain Tattoo</title>
+        <link rel="icon" type="image/x-icon" href="favicon.ico">
+        <link rel="icon" type="image/png" href="admin/image/rplogo.png">
+        <link rel="stylesheet" href="css/loading.css">
+        <link rel="stylesheet" href="css/gallery.css">
+    </head>
+    <body>
+        <!-- Header -->
+        <header>
+            <div class="logo">
+                <a href="index.html" style="display: flex; align-items: center; gap: 1rem; text-decoration: none; color: inherit;">
+                    <img src="admin/image/rplogo.png" alt="Real Pain Logo">
+                    <div class="title">
+                        <h1>REAL PAIN</h1>
+                        <p>TATTOO STUDIO</p>
+                    </div>
+                </a>
+            </div>
+            <div class="hamburger-menu" onclick="toggleMenu()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <nav class="nav-menu">
+                <ul>
+                    <li><a href="index.html">HOME</a></li>
+                    <li><a href="index.html#about">ABOUT</a></li>
+                    <li><a href="index.html#gallery-preview">GALLERY</a></li>
+                    <li><a href="calendar.html">AVAILABILITY</a></li>
+                    <li><a href="index.html#reviews">REVIEWS</a></li>
+                    <li><a href="index.html#contact">CONTACT</a></li>
+                </ul>
+            </nav>
+        </header>
+
+        <!-- Hero Section -->
+        <section class="gallery-hero">
+            <div class="hero-overlay">
+                <h1>TATTOO GALLERY</h1>
+                <p>Explore our masterpieces and get inspired for your next ink</p>
+                <div class="hero-stats">
+                    <div class="stat">
+                        <div class="stat-number">12+</div>
+                        <div class="stat-label">Artworks</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-number">100+</div>
+                        <div class="stat-label">Happy Clients</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-number">5</div>
+                        <div class="stat-label">Years Experience</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Gallery Filter -->
+        <section class="gallery-filter">
+            <div class="filter-container">
+                <h3>Browse by Category</h3>
+                <div class="filter-buttons">
+                    <button class="filter-btn active" data-category="all">All Tattoos</button>
+                    <button class="filter-btn" data-category="realistic">Realistic</button>
+                    <button class="filter-btn" data-category="oriental">Oriental</button>
+                    <button class="filter-btn" data-category="traditional">Traditional</button>
+                    <button class="filter-btn" data-category="custom">Custom</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Main Gallery -->
+        <section class="main-gallery">
+            <div class="gallery-container">
+                <div class="gallery-grid" id="galleryGrid">
+                </div>
+            </div>
+        </section>
+
+        <!-- Call to Action -->
+        <section class="gallery-cta">
+            <div class="cta-content">
+                <h2>Inspired by What You See?</h2>
+                <p>Let's create your next masterpiece together</p>
+                <div class="cta-buttons">
+                    <a href="book-now.html" class="cta-btn primary">
+                        <i class="fas fa-calendar-plus"></i>
+                        Book Your Session
+                    </a>
+                    <a href="calendar.html" class="cta-btn secondary">
+                        <i class="fas fa-clock"></i>
+                        Check Availability
+                    </a>
+                    <a href="augmented-reality.html" class="cta-btn tertiary">
+                        <i class="fas fa-camera"></i>
+                        Try AR Feature
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Enhanced Lightbox -->
+        <div id="lightbox" class="lightbox">
+            <div class="lightbox-content">
+                <button class="lightbox-close" onclick="closeLightbox()">&times;</button>
+                <img id="lightbox-img" alt="Tattoo Image">
+                <div class="lightbox-info">
+                    <p id="lightbox-date">Date</p>
+                    <div class="lightbox-actions">
+                        <button class="lightbox-btn" onclick="shareTattoo()">
+                            <i class="fas fa-share"></i>
+                            Share
+                        </button>
+                        <button class="lightbox-btn" onclick="bookSimilar()">
+                            <i class="fas fa-heart"></i>
+                            Book Similar
+                        </button>
+                    </div>
+                </div>
+                <button class="lightbox-nav prev" onclick="previousImage()">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+                <button class="lightbox-nav next" onclick="nextImage()">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+            </div>
+        </div>
+
+         <script src="js/loading.js"></script>
+        <script src="js/script.js"></script>
+        <script type="module" src="js/gallery.js"></script>
+    </body>
+</html>

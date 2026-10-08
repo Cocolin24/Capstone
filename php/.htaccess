@@ -1,0 +1,30 @@
+# Deny direct access to all PHP files in this directory
+<Files "*.php">
+    Order Allow,Deny
+    Deny from all
+</Files>
+
+# Allow access only to send-sms.php (called by your scripts)
+<Files "send-sms.php">
+    Order Allow,Deny
+    Allow from all
+</Files>
+
+# Allow access to newsletter-subscribe.php
+<Files "newsletter-subscribe.php">
+    Order Allow,Deny
+    Allow from all
+</Files>
+
+# Allow access to test-newsletter.php
+<Files "test-newsletter.php">
+    Order Allow,Deny
+    Allow from all
+</Files>
+
+# Extra protection for config.php
+<Files "config.php">
+    Order Allow,Deny
+    Deny from all
+</Files>
+

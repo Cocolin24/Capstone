@@ -1,0 +1,435 @@
+/* ========== SCROLL ANIMATIONS ========== */
+.scroll-animate {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.scroll-animate.animate {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Animation Types */
+.scroll-animate[data-animation="fadeIn"] {
+    transform: none;
+}
+.scroll-animate[data-animation="fadeIn"].animate {
+    transform: none;
+}
+
+.scroll-animate[data-animation="slideInLeft"] {
+    transform: translateX(-50px);
+}
+.scroll-animate[data-animation="slideInLeft"].animate {
+    transform: translateX(0);
+}
+
+.scroll-animate[data-animation="slideInRight"] {
+    transform: translateX(50px);
+}
+.scroll-animate[data-animation="slideInRight"].animate {
+    transform: translateX(0);
+}
+
+.scroll-animate[data-animation="slideInUp"] {
+    transform: translateY(50px);
+}
+.scroll-animate[data-animation="slideInUp"].animate {
+    transform: translateY(0);
+}
+
+.scroll-animate[data-animation="slideInDown"] {
+    transform: translateY(-50px);
+}
+.scroll-animate[data-animation="slideInDown"].animate {
+    transform: translateY(0);
+}
+
+.scroll-animate[data-animation="zoomIn"] {
+    transform: scale(0.8) translateY(30px);
+}
+.scroll-animate[data-animation="zoomIn"].animate {
+    transform: scale(1) translateY(0);
+}
+
+.scroll-animate[data-animation="rotateIn"] {
+    transform: rotate(-180deg) scale(0.5);
+}
+.scroll-animate[data-animation="rotateIn"].animate {
+    transform: rotate(0deg) scale(1);
+}
+
+.scroll-animate[data-animation="bounceIn"] {
+    transform: scale(0.3) translateY(30px);
+    transition: all 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+.scroll-animate[data-animation="bounceIn"].animate {
+    transform: scale(1) translateY(0);
+}
+
+.scroll-animate[data-animation="pulse"] {
+    transform: scale(1) translateY(30px);
+}
+.scroll-animate[data-animation="pulse"].animate {
+    transform: scale(1) translateY(0);
+    animation: pulse 2s infinite;
+}
+
+.scroll-animate[data-animation="scaleIn"] {
+    transform: scale(0) translateY(0);
+}
+.scroll-animate[data-animation="scaleIn"].animate {
+    transform: scale(1) translateY(0);
+}
+
+.scroll-animate[data-animation="bounce"] {
+    transform: translateY(0);
+}
+.scroll-animate[data-animation="bounce"].animate {
+    animation: bounce 1s ease-in-out;
+}
+
+@keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+}
+
+@keyframes bounce {
+    0%, 20%, 53%, 80%, 100% { transform: translateY(0); }
+    40%, 43% { transform: translateY(-15px); }
+    70% { transform: translateY(-7px); }
+    90% { transform: translateY(-3px); }
+}
+
+/* Enhanced Gallery Items */
+.gallery-item {
+    transition: all 0.4s ease;
+    cursor: pointer;
+}
+
+.gallery-item:hover {
+    transform: scale(1.05) rotate(2deg);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+    z-index: 5;
+}
+
+/* Enhanced Studio Items */
+.studio-item {
+    transition: all 0.4s ease;
+    cursor: pointer;
+}
+
+.studio-item:hover {
+    transform: scale(1.08);
+    box-shadow: 0 15px 30px rgba(0,0,0,0.4);
+    filter: brightness(1.1);
+}
+
+/* Enhanced Polaroid Items */
+.polaroid-item {
+    transition: all 0.4s ease;
+    cursor: pointer;
+}
+
+.polaroid-item:hover {
+    transform: scale(1.1) rotate(5deg);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+    z-index: 10;
+}
+
+/* Enhanced Video Items */
+.video-item {
+    transition: all 0.4s ease;
+    cursor: pointer;
+}
+
+.video-item:hover {
+    transform: scale(1.05);
+    box-shadow: 0 15px 35px rgba(0,0,0,0.6);
+    filter: brightness(1.2);
+}
+
+/* Floating Elements */
+.floating {
+    animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+}
+
+/* ========== BACK TO TOP BUTTON ========== */
+.back-to-top {
+    position: fixed;
+    bottom: 160px;
+    right: 20px;
+    width: 60px;
+    height: 60px;
+    background: linear-gradient(135deg, #333, #666);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 28px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s ease;
+    z-index: 1000;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(20px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.back-to-top.show {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.back-to-top:hover {
+    background: linear-gradient(135deg, #666, #999);
+    transform: translateY(-3px) scale(1.1);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+}
+
+.back-to-top:active {
+    transform: translateY(-1px) scale(1.05);
+}
+
+.back-to-top i {
+    transition: transform 0.3s ease;
+}
+
+.back-to-top:hover i {
+    transform: translateY(-2px);
+    animation: bounce-arrow 0.6s ease-in-out;
+}
+
+@keyframes bounce-arrow {
+    0%, 100% { transform: translateY(-2px); }
+    50% { transform: translateY(-5px); }
+}
+
+/* Pulsing effect when button appears */
+.back-to-top.show {
+    animation: pulse-appear 0.6s ease-out;
+}
+
+@keyframes pulse-appear {
+    0% { 
+        transform: scale(0) translateY(20px);
+        opacity: 0;
+    }
+    50% { 
+        transform: scale(1.2) translateY(0);
+        opacity: 0.8;
+    }
+    100% { 
+        transform: scale(1) translateY(0);
+        opacity: 1;
+    }
+}
+
+/* Mobile Optimizations */
+@media (max-width: 768px) {
+    .scroll-animate {
+        transform: translateY(20px);
+    }
+    
+    .gallery-item:hover {
+        transform: scale(1.02);
+    }
+    
+    .studio-item:hover {
+        transform: scale(1.05);
+    }
+    
+    .back-to-top {
+        bottom: 150px;
+        right: 20px;
+        width: 55px;
+        height: 55px;
+        font-size: 24px;
+    }
+}
+
+/* ========== IMAGE POPUP STYLES ========== */
+.image-popup {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.95);
+    z-index: 10000;
+    backdrop-filter: blur(10px);
+    animation: fadeIn 0.3s ease;
+}
+
+.popup-content {
+    position: relative;
+    width: 90%;
+    max-width: 800px;
+    height: 90%;
+    margin: 5% auto;
+    background: #1a1a1a;
+    border-radius: 20px;
+    border: 3px solid #333;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.8);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    animation: popupSlideIn 0.4s ease;
+}
+
+@keyframes popupSlideIn {
+    from {
+        transform: scale(0.8) translateY(50px);
+        opacity: 0;
+    }
+    to {
+        transform: scale(1) translateY(0);
+        opacity: 1;
+    }
+}
+
+.popup-close {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    font-size: 2rem;
+    color: #fff;
+    cursor: pointer;
+    z-index: 10001;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255,255,255,0.1);
+    border-radius: 50%;
+    transition: all 0.3s ease;
+}
+
+.popup-close:hover {
+    background: rgba(255,255,255,0.2);
+    transform: scale(1.1);
+}
+
+#popupImage {
+    width: 100%;
+    height: 70%;
+    object-fit: contain;
+    background: #000;
+    border-radius: 15px 15px 0 0;
+}
+
+.popup-info {
+    padding: 20px;
+    color: white;
+    text-align: center;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.popup-info h3 {
+    font-size: 1.8rem;
+    margin-bottom: 10px;
+    color: #d4d4d4;
+}
+
+.popup-info p {
+    font-size: 1rem;
+    margin-bottom: 20px;
+    color: #999;
+}
+
+.popup-buttons {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.popup-btn {
+    padding: 12px 25px;
+    border: none;
+    border-radius: 25px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.popup-btn.primary {
+    background: linear-gradient(45deg, #666, #999);
+    color: white;
+}
+
+.popup-btn.primary:hover {
+    background: linear-gradient(45deg, #999, #ccc);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+}
+
+.popup-btn.secondary {
+    background: transparent;
+    color: #d4d4d4;
+    border: 2px solid #666;
+}
+
+.popup-btn.secondary:hover {
+    background: #666;
+    color: white;
+    transform: translateY(-2px);
+}
+
+/* Mobile Popup Styles */
+@media (max-width: 768px) {
+    .popup-content {
+        width: 95%;
+        height: 85%;
+        margin: 7.5% auto;
+    }
+    
+    .popup-close {
+        top: 10px;
+        right: 15px;
+        font-size: 1.5rem;
+        width: 35px;
+        height: 35px;
+    }
+    
+    #popupImage {
+        height: 60%;
+    }
+    
+    .popup-info {
+        padding: 15px;
+    }
+    
+    .popup-info h3 {
+        font-size: 1.5rem;
+    }
+    
+    .popup-buttons {
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .popup-btn {
+        width: 100%;
+        justify-content: center;
+        padding: 15px;
+    }
+}

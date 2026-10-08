@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">  
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Real Pain Tattoo Studio</title>
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="icon" type="image/png" href="admin/image/rplogo.png">
+    <link rel="stylesheet" href="css/loading.css">
+    <link rel="stylesheet" href="css/homepage.css">
+    <link rel="stylesheet" href="css/scroll-animations.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+</head>
+<!-- TITLE/LOGO/NAVIGATION SECTION -->
+<body>
+      <header>
+        <div class="logo">
+        <img src="admin/image/rplogo.png" alt="Real Pain Logo">
+        <div class="title">
+            <h1>REAL PAIN</h1>
+            <p>TATTOO STUDIO</p>
+        </div>
+        </div>
+        <div class="hamburger-menu" onclick="toggleMenu()">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <nav class="nav-menu">
+            <ul>
+                <li><a href="#">HOME</a></li>
+                <li><a href="#about">ABOUT</a></li>
+                <li><a href="#gallery-preview">GALLERY</a></li>
+                <li><a href="calendar.html">AVAILABILITY</a></li>
+                <li><a href="#reviews">REVIEWS</a></li>
+                <li><a href="#contact">CONTACT</a></li>
+            </ul>
+        </nav>
+      </header>
+<!-- MAIN HOMEPAGE SECTION -->
+      <section class="hero">
+        <div class="overlay-text">
+            <h2>WHERE ART MEETS SKIN</h2>
+            <p>EXPERIENCE THE FINEST IN TATTOO ARTISTRY</p>
+            <a href="book-now.html" class="book-btn">BOOK NOW</a>
+        </div>
+      </section>
+<!-- ABOUT SECTION -->
+      <section id="about" class="about-section">
+        <div class="about-overlay scroll-animate" data-animation="fadeInUp">
+            <h3 class="scroll-animate" data-animation="slideInLeft">The Real Pain Story</h3>
+            <p class="subtitle scroll-animate" data-animation="fadeIn" data-delay="0.2">
+                Real Pain has always been more than just ink on skin,<br />
+                it's a canvas for stories, growth, and genuine connection.
+            </p>
+            <hr class="divider scroll-animate" data-animation="scaleIn" data-delay="0.4"/>
+            <p class="description scroll-animate" data-animation="fadeInUp" data-delay="0.6">
+                The Real Pain Tattoo Studio started with two friends who both love tattoos and are good
+                at art. One of them really liked tattoos and often looked at other people's tattoos because
+                he was amazed by how creative and detailed, they were. The other one was good at making
+                designs using pencil and paper. One day, while they were just talking, the tattoo lover
+                encouraged his friend to try using his talent as a job. That simple conversation led to the
+                start of Real Pain Tattoo Studio in 2021. What began as a small effort with strong passion
+                and dedication is now becoming a place for people passionate about tattoos.<br />
+                <strong>At Real Pain, every tattoo is a masterpiece!</strong>
+            </p>
+            <a href="team.html" class="team-btn scroll-animate" data-animation="bounceIn" data-delay="0.8">MEET OUR TEAM</a>
+        </div>
+      </section>
+<!-- GALLERY SECTION -->
+      <section id="gallery-preview" class="artworks-section">
+        <div class="artworks-text scroll-animate" data-animation="slideInUp">
+            <h3 class="scroll-animate" data-animation="fadeIn">behind our</h3>
+            <h4 class="scroll-animate" data-animation="slideInRight" data-delay="0.2">ARTWORKS</h4>
+            <a href="gallery.html" class="gallery-btn scroll-animate" data-animation="pulse" data-delay="0.4">Show more!</a>
+        </div>
+        <div class="artworks-grid">
+            <img src="homepage/rp-gtattoo.jpg" alt="Tattoo 1" class="scroll-animate gallery-item popup-image" data-animation="zoomIn" data-delay="0.1" onclick="openImagePopup(this)">
+            <img src="homepage/rp-gtattoo1.jpg" alt="Tattoo 2" class="scroll-animate gallery-item popup-image" data-animation="zoomIn" data-delay="0.2" onclick="openImagePopup(this)">
+            <img src="homepage/rp-gtattoo2.jpg" alt="Tattoo 3" class="scroll-animate gallery-item popup-image" data-animation="zoomIn" data-delay="0.3" onclick="openImagePopup(this)">
+            <img src="homepage/rp-gtattoo3.jpg" alt="Tattoo 4" class="scroll-animate gallery-item popup-image" data-animation="zoomIn" data-delay="0.4" onclick="openImagePopup(this)">
+            <img src="homepage/rp-gtattoo4.jpg" alt="Tattoo 5" class="scroll-animate gallery-item popup-image" data-animation="zoomIn" data-delay="0.5" onclick="openImagePopup(this)">
+            <img src="homepage/rp-gtattoo5.jpg" alt="Tattoo 6" class="scroll-animate gallery-item popup-image" data-animation="zoomIn" data-delay="0.6" onclick="openImagePopup(this)">
+            <img src="homepage/rp-gtattoo6.jpg" alt="Tattoo 7" class="scroll-animate gallery-item popup-image" data-animation="zoomIn" data-delay="0.7" onclick="openImagePopup(this)">
+            <img src="homepage/rp-gtattoo7.jpg" alt="Tattoo 8" class="scroll-animate gallery-item popup-image" data-animation="zoomIn" data-delay="0.8" onclick="openImagePopup(this)">
+            <img src="homepage/rp-gtattoo8.jpg" alt="Tattoo 9" class="scroll-animate gallery-item popup-image" data-animation="zoomIn" data-delay="0.9" onclick="openImagePopup(this)">
+        </div>
+      </section>
+<!-- OUR STUDIO SECTION -->
+      <section class="our-studio">
+        <h3 class="scroll-animate" data-animation="slideInDown"><span class="scroll-animate" data-animation="rotateIn" data-delay="0.2">Our</span> Studio</h3>
+        <div class="studio-gallery">
+            <img src="homepage/rp-studio1.jpg" alt="Studio Interior - Tattoo Chairs" class="scroll-animate studio-item popup-image" data-animation="slideInLeft" data-delay="0.1" onclick="openImagePopup(this)">
+            <img src="homepage/rp-studio2.jpg" alt="Studio Interior - Equipment" class="scroll-animate studio-item popup-image" data-animation="slideInUp" data-delay="0.3" onclick="openImagePopup(this)">
+            <img src="homepage/rp-studio3.jpg" alt="Studio Interior - Work Area" class="scroll-animate studio-item popup-image" data-animation="slideInDown" data-delay="0.5" onclick="openImagePopup(this)">
+            <img src="homepage/rp-studio4.jpg" alt="Studio Interior - Reception" class="scroll-animate studio-item popup-image" data-animation="slideInRight" data-delay="0.7" onclick="openImagePopup(this)">
+        </div>
+        <p class="studio-address scroll-animate" data-animation="fadeInUp" data-delay="0.9">
+            <i class="fa-solid fa-location-dot scroll-animate" data-animation="bounce" data-delay="1.1"></i>
+            19A Pepay St. Brgy. Wawa, Taguig city
+        </p>
+      </section>
+<!-- GALLERY SECTION  2-->
+      <section class="studio-break">
+        <div class="studio-text scroll-animate" data-animation="slideInUp">
+            <h3 class="scroll-animate" data-animation="fadeIn" data-delay="0.2">OUR STUDIO IS PLEASED TO MEET YOU!</h3>
+        </div>
+        <div class="studio-images">
+            <img src="homepage/rp-polaroid1.jpg" alt="Tattoo 1" class="scroll-animate polaroid-item" data-animation="rotateIn" data-delay="0.1">
+            <img src="homepage/rp-polaroid2.jpg" alt="Tattoo 2" class="scroll-animate polaroid-item" data-animation="rotateIn" data-delay="0.2">
+            <img src="homepage/rp-polaroid3.jpg" alt="Tattoo 3" class="scroll-animate polaroid-item" data-animation="rotateIn" data-delay="0.3">
+            <img src="homepage/rp-polaroid4.jpg" alt="Tattoo 4" class="scroll-animate polaroid-item" data-animation="rotateIn" data-delay="0.4">
+            <img src="homepage/rp-polaroid5.jpg" alt="Tattoo 5" class="scroll-animate polaroid-item" data-animation="rotateIn" data-delay="0.5">
+            <img src="homepage/rp-polaroid6.jpg" alt="Tattoo 6" class="scroll-animate polaroid-item" data-animation="rotateIn" data-delay="0.6">
+            <img src="homepage/rp-polaroid7.jpg" alt="Tattoo 7" class="scroll-animate polaroid-item" data-animation="rotateIn" data-delay="0.7">
+            <img src="homepage/rp-polaroid8.jpg" alt="Tattoo 8" class="scroll-animate polaroid-item" data-animation="rotateIn" data-delay="0.8">
+
+        </div>
+      </section>
+<!-- SHORT VIDS SECTION -->
+      <section class="short-videos-section">
+        <div class="short-videos-text scroll-animate" data-animation="slideInDown">
+            <h2 class="scroll-animate" data-animation="fadeIn" data-delay="0.2">SEE THE ART UNFOLD</h2>
+            <p class="scroll-animate" data-animation="slideInUp" data-delay="0.4">WATCH OUR SHORT VIDEOS</p>
+        </div>
+        <div class="short-videos-wrapper">
+            <video src="short-videos/ssstik.io_@realpain_tattoostudio_1749975931688.mp4" autoplay loop muted class="scroll-animate video-item" data-animation="zoomIn" data-delay="0.1"></video>
+            <video src="short-videos/ssstik.io_@realpain_tattoostudio_1749975972288.mp4" autoplay loop muted class="scroll-animate video-item" data-animation="zoomIn" data-delay="0.3"></video>
+            <video src="short-videos/ssstik.io_@realpain_tattoostudio_1749976009707.mp4" autoplay loop muted class="scroll-animate video-item" data-animation="zoomIn" data-delay="0.5"></video>
+        </div>
+      </section>
+<!-- REVIEWS SECTION -->
+      <section id="reviews" class="reviews-section">
+        <h2>REVIEWS</h2>
+        <p class="sub">Reviews from some of our solid customers.</p>
+        <div class="review-grid" id="reviewGrid">
+            <div class="review-card">
+                <p class="name">Cheska Rivera</p>
+                <p class="stars">★★★★★</p>
+                <p class="message">First time ko magpa-tattoo and medyo kinakabahan ako pero super accommodating sila. 
+                    Chill lang yung vibe, at hindi intimidating. Medyo natagalan lang sa sketch pero worth it naman. 
+                    Thank you Real Pain fam!</p>
+            </div>
+            <div class="review-card">
+                <p class="name">Rafael Ramos</p>
+                <p class="stars">★★★★★</p>
+                <p class="message">Astig ng unang tattoo ko, medyo kinakabahan pa ako pero yung artist, super chill lang. 
+                    Hindi ko ramdam ang sakit! Ang ganda ng design ko. Salamat!</p>
+            </div>
+            <div class="review-card">
+                <p class="name">Carlos Santos</p>
+                <p class="stars">★★★★★</p>
+                <p class="message">Tapos na ang first tattoo ko! Ang sakit pero worth it. 
+                    Salamat sa awesome service, cool ng mga tao dito</p>
+            </div>
+            <div class="review-card">
+                <p class="name">Maria Reyes</p>
+                <p class="stars">★★★★★</p>
+                <p class="message">First time ko magpa-tattoo and di ako na-disappoint! 
+                    Relax lang yung vibe, di intimidating. Sobrang happy ko sa outcome, malupet!</p>
+            </div>
+        </div>
+        
+        <!-- View All Reviews Button -->
+        <div class="reviews-actions">
+            <a href="reviews.html" class="view-all-btn">
+                <i class="fas fa-external-link-alt"></i>
+                View All Reviews
+            </a>
+        </div>
+        <div class="cta-box">
+                <h3>Love your ink? Let the world know!</h3>
+                <p>Tell us about your tattoo journey, your artist, 
+                    and how you felt from entering and walking out of the studio.</p>
+                <hr>        
+        <div class="cat-and-button">
+            <img src="homepage/rp-kitty.png" alt="Cute Cat" class="cat-icon"> 
+                <a href="#" class="review-btn" id="openReview">Review Now</a>
+            </div>     
+            <p class="hint">Hit that "Review Now" button and let the world know how you felt!</p>
+        </div>
+        <div id="reviewPanel">
+            <div class="review-content">
+                <button id="closeReview" class="close-btn">x</button>
+                <h2>Your review helps future clients feel confident and inspired.</h2>
+                <p>Make your mark now!</p>
+                <form id="reviewForm">
+                    <input type="text" id="reviewerName" placeholder="Name" required/>
+                    <label class="rating-label">How would you rate us?</label>
+                    <div class="star-rating">
+                        <input type="radio" id="star5" name="rating" value="5"/><label for="star5">★</label>
+                        <input type="radio" id="star4" name="rating" value="4"/><label for="star4">★</label>
+                        <input type="radio" id="star3" name="rating" value="3"/><label for="star3">★</label>
+                        <input type="radio" id="star2" name="rating" value="2"/><label for="star2">★</label>
+                        <input type="radio" id="star1" name="rating" value="1"/><label for="star1">★</label>
+                    </div>
+                    <textarea id="reviewMessage" placeholder="Your opinion matters, share it with us!" required></textarea>
+                    <label for="tattooPhoto">Want to show it off? Share a photo of your tattoo below:</label>
+                    <input type="file" id="tattooPhoto"/>
+                    <button type="submit">SUBMIT NOW</button>
+                </form>
+            </div>
+        </div>
+    </section>
+<!-- CONTACT AND VISIT US SECTION -->
+<section id="contact" class="new-contact-section">
+    <div class="new-contact-container">
+        <div class="contact-left">
+            <h2>CONTACT &<br>VISIT US</h2>
+            <div class="info-bubble">You can visit us, We are located at:</div>
+            <p class="address"><i class="fas fa-map-marker-alt"></i> 19A Pepay St. Wawa 1632 Makati, Philippines</p>
+            <a href="https://www.google.com/maps/@14.5210222,121.0754841,3a,75y,193.39h,68.01t/data=!3m7!1e1!3m5!1sV8ev7ga26LqDnzTdxtHQ0Q!2e0!6shttps:%2F%2Fstreetviewpixels-pa.googleapis.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D21.992832195675504%26panoid%3DV8ev7ga26LqDnzTdxtHQ0Q%26yaw%3D193.39337745170172!7i16384!8i8192?entry=ttu&g_ep=EgoyMDI1MDYxNy4wIKXMDSoASAFQAw%3D%3D" target="_blank">
+                <img src="homepage/rp-studiolocation.jpg" alt="Map Location" class="map-image">
+            </a>
+            <p>Click this image to direct you in Google Maps!</p>
+        </div>
+        
+        <div class="contact-divider"></div> 
+        
+        <div class="contact-right">
+            <div class="contact-details">
+                <p><i class="fas fa-envelope"></i> rovic.ballesteros05@gmail.com</p>
+                <p><i class="fas fa-phone"></i> 0961 084 4733</p>
+            </div>
+            <div class="info-bubble">You can also visit and check our Social media accounts:</div>
+            <div class="social-links">
+                <p><i class="fab fa-facebook-f"></i> <a href="https://www.facebook.com/realpainstudio" target="_blank">Real Pain Tattoo Studio</a></p>
+                <p><i class="fab fa-instagram"></i> <a href="https://www.instagram.com/realpain_tattoostudio" target="_blank">Real Pain Tattoo Studio</a></p>
+                <p><i class="fab fa-tiktok"></i> <a href="https://www.tiktok.com/@realpain_tattoostudio" target="_blank">Real Pain Tattoo Studio</a></p>
+            </div>
+            <hr class="right-divider">
+            <div class="newsletter">
+                <h3>NEWSLETTER</h3>
+                <p>Let's keep in touch.</p>
+                <form id="newsletterForm" class="newsletter-form">
+                    <input type="email" id="newsletterEmail" placeholder="e-mail" required>
+                    <button type="submit">SUBMIT</button>
+                </form>
+                <div class="form-group recaptcha-container">
+                    <div class="g-recaptcha" data-sitekey="6Lfz8wIsAAAAALEAZmY07hu0sdG7DQd5hJ_XT-r3" data-callback="onRecaptchaSuccess" data-theme="dark">
+                    </div>
+                    <span class="recaptcha-error-message" id="recaptchaError" 
+                    style="display: none; color: #ff4444; font-size: 14px; margin-top: 5px;">Please complete the reCAPTCHA verification.</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- FINAL FOOTER SECTION -->
+<footer class="final-footer">
+    <p>Memories fade,<br>but tattoos stay the same.</p>
+    <h2>RPTS<sup>®</sup></h2>
+</footer>
+
+<!-- CHAT WIDGET -->
+<button class="chat-button" onclick="toggleChat()">
+  <i class="fas fa-comment-dots"></i>
+  <span class="bubble-text">Chat with us!</span>
+</button>
+
+<!-- CHAT POPUP -->
+<div class="chat-popup" id="chatPopup">
+  <div class="chat-header">
+    <img src="homepage/rp-chatlogo.jpg" alt="RPTS Logo">
+    <h3>RPTS Helpdesk</h3>
+    <button class="close-chat" onclick="toggleChat()">×</button>
+  </div>
+  <div class="chat-body" id="chatBody">
+  <div class="chat-message options">
+    <button onclick="handleOptionClick(this)">Do you require a deposit to schedule an appointment?</button>
+    <button onclick="handleOptionClick(this)">How much is the minimum deposit?</button>
+    <button onclick="handleOptionClick(this)">Are walk-ins allowed?</button>
+    <button onclick="handleOptionClick(this)">Other concerns</button>
+  </div>
+</div>
+
+<div class="chat-input-area">
+  <textarea id="userInput" placeholder="Type your message..."></textarea>
+  <button onclick="sendUserMessage()">Send</button>
+</div>
+
+</div>
+<!-- AR FLOATING BUTTON -->
+ <button class="ar-button" onclick="gotoAR()">
+    <i class="fas fa-camera"></i>
+    <span class="bubble-text">Try our AR feature!</span>
+ </button>
+
+<!-- BACK TO TOP BUTTON -->
+<button class="back-to-top" id="backToTopBtn" onclick="scrollToTop()">
+    <i class="fas fa-arrow-up"></i>
+    <span class="bubble-text">Back to top</span>
+</button>
+
+    <!-- Image Popup Modal -->
+    <div id="imagePopup" class="image-popup">
+        <div class="popup-content">
+            <span class="popup-close" onclick="closeImagePopup()">&times;</span>
+            <img id="popupImage" src="" alt="">
+            <div class="popup-info">
+                <h3 id="popupTitle">Tattoo Artwork</h3>
+                <p id="popupDescription">Click the buttons below to take action</p>
+                <div class="popup-buttons">
+                    <button onclick="bookWithReference()" class="popup-btn primary">
+                        <i class="fas fa-calendar-plus"></i> Book with this design
+                    </button>
+                    <button onclick="viewFullGallery()" class="popup-btn secondary">
+                        <i class="fas fa-images"></i> View full gallery
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/loading.js"></script>
+    <script src="js/script.js"></script>
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+    <script src="js/scroll-animations.js"></script>
+    <script type="module" src="js/homepage.js"></script>
+</body>
+</html>

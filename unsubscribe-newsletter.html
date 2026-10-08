@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unsubscribe Newsletter - Real Pain Tattoo Studio</title>
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        .verification-container {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            max-width: 500px;
+            width: 100%;
+            text-align: center;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+        .success-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 20px;
+            background: #28a745;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 40px;
+            color: white;
+        }
+        .error-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 20px;
+            background: #dc3545;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 40px;
+            color: white;
+        }
+        h1 {
+            color: #1a1a1a;
+            margin-bottom: 20px;
+            font-size: 28px;
+        }
+        p {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 30px;
+        }
+        .loading {
+            color: #1a1a1a;
+        }
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background: #1a1a1a;
+            color: white;
+            text-decoration: none;
+            border-radius: 25px;
+            margin-top: 20px;
+            transition: all 0.3s;
+        }
+        .btn:hover {
+            background: #333;
+            transform: translateY(-2px);
+        }
+    </style>
+</head>
+<body>
+    <div class="verification-container">
+        <div id="loading-icon" class="loading">
+            <p>Processing your unsubscribe request...</p>
+        </div>
+        <div id="success-icon" class="success-icon" style="display: none;">
+            ✓
+        </div>
+        <div id="error-icon" class="error-icon" style="display: none;">
+            ✕
+        </div>
+        <h1 id="message">Unsubscribing from Newsletter</h1>
+        <p id="description">Please wait while we process your request...</p>
+    </div>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.1/firebase-app.js";
+        import {
+            getFirestore,
+            collection,
+            query,
+            where,
+            getDocs,
+            deleteDoc,
+            doc
+        } from "https://www.gstatic.com/firebasejs/10.12.1/firebase-firestore.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyC5OGf8nc85I9cw1SQW65oJbSJDAtLLoW4",
+            authDomain: "realpainbooking.firebaseapp.com",
+            projectId: "realpainbooking",
+            storageBucket: "realpainbooking.firebasestorage.app",
+            messagingSenderId: "584949331159",
+            appId: "1:584949331159:web:8ea35b28ab22388871ec92"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+        async function unsubscribeEmail() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const email = urlParams.get('email');
+
+            const messageEl = document.getElementById('message');
+            const descEl = document.getElementById('description');
+            const loadingIcon = document.getElementById('loading-icon');
+            const successIcon = document.getElementById('success-icon');
+            const errorIcon = document.getElementById('error-icon');
+
+            if (!email) {
+                errorIcon.style.display = 'flex';
+                successIcon.style.display = 'none';
+                loadingIcon.style.display = 'none';
+                messageEl.textContent = 'Invalid Unsubscribe Link';
+                descEl.textContent = 'This unsubscribe link is invalid. Please contact us if you need assistance.';
+                return;
+            }
+
+            try {
+                const q = query(
+                    collection(db, 'newsletter'),
+                    where('email', '==', email)
+                );
+                const querySnapshot = await getDocs(q);
+
+                if (querySnapshot.empty) {
+                    loadingIcon.style.display = 'none';
+                    successIcon.style.display = 'flex';
+                    errorIcon.style.display = 'none';
+                    messageEl.textContent = 'Already Unsubscribed';
+                    descEl.innerHTML = 'This email address is not subscribed to our newsletter.<br><br><a href="index.html" class="btn">Go to Homepage</a>';
+                    return;
+                }
+
+                // Delete all subscriptions for this email
+                const deletePromises = querySnapshot.docs.map(docRef => deleteDoc(docRef.ref));
+                await Promise.all(deletePromises);
+
+                loadingIcon.style.display = 'none';
+                successIcon.style.display = 'flex';
+                errorIcon.style.display = 'none';
+                messageEl.textContent = 'Successfully Unsubscribed!';
+                descEl.innerHTML = 'You have been successfully unsubscribed from our newsletter. We\'re sorry to see you go!<br><br>If you change your mind, you can always subscribe again from our website.<br><br><a href="index.html" class="btn">Go to Homepage</a>';
+
+            } catch (error) {
+                loadingIcon.style.display = 'none';
+                errorIcon.style.display = 'flex';
+                successIcon.style.display = 'none';
+                messageEl.textContent = 'Unsubscribe Failed';
+                descEl.textContent = error.message || 'Unable to process your unsubscribe request. Please try again later or contact us for assistance.';
+                console.error('Unsubscribe error:', error);
+            }
+        }
+
+        unsubscribeEmail();
+    </script>
+</body>
+</html>
+

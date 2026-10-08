@@ -1,0 +1,26 @@
+User-agent: *
+Disallow: /admin/
+Disallow: /php/
+Disallow: /sms/
+Disallow: /*.php$
+Disallow: /*.log$
+Disallow: /*.env$
+Disallow: /*.config$
+
+# Allow public pages
+Allow: /index.html
+Allow: /book-now.html
+Allow: /calendar.html
+Allow: /gallery.html
+Allow: /reviews.html
+Allow: /team.html
+Allow: /augmented-reality.html
+Allow: /css/
+Allow: /js/
+Allow: /gallery/
+Allow: /homepage/
+Allow: /team/
+Allow: /virtual-reality/
+Allow: /short-videos/
+
+Sitemap: https://realpaintattoo.ink/sitemap.xml

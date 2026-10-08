@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All Reviews - Real Pain Tattoo Studio</title>
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="icon" type="image/png" href="admin/image/rplogo.png">
+    <link rel="stylesheet" href="css/loading.css">
+    <link rel="stylesheet" href="css/reviews.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="logo">
+            <a href="index.html" style="display: flex; align-items: center; gap: 1rem; text-decoration: none; color: inherit;">
+                <img src="admin/image/rplogo.png" alt="Real Pain Logo">
+                <div class="title">
+                    <h1>REAL PAIN</h1>
+                    <p>TATTOO STUDIO</p>
+                </div>
+            </a>
+        </div>
+        <div class="hamburger-menu" onclick="toggleMenu()">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <nav class="nav-menu">
+            <ul>
+                <li><a href="index.html">HOME</a></li>
+                <li><a href="index.html#about">ABOUT</a></li>
+                <li><a href="index.html#gallery-preview">GALLERY</a></li>
+                <li><a href="calendar.html">AVAILABILITY</a></li>
+                <li><a href="index.html#reviews">REVIEWS</a></li>
+                <li><a href="index.html#contact">CONTACT</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="reviews-hero">
+        <div class="hero-overlay">
+            <h1>CLIENT REVIEWS</h1>
+            <p>Read what our amazing clients have to say about their Real Pain experience</p>
+            <div class="hero-stats">
+                <div class="stat">
+                    <div class="stat-number" id="totalReviews">0</div>
+                    <div class="stat-label">Total Reviews</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-number" id="averageRating">5.0</div>
+                    <div class="stat-label">Average Rating</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-number" id="fiveStarReviews">0</div>
+                    <div class="stat-label">5-Star Reviews</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Reviews Filter -->
+    <section class="reviews-filter">
+        <div class="filter-container">
+            <h3>Filter Reviews</h3>
+            <div class="filter-buttons">
+                <button class="filter-btn active" data-rating="all">All Reviews</button>
+                <button class="filter-btn" data-rating="5">5 Stars</button>
+                <button class="filter-btn" data-rating="4">4 Stars</button>
+                <button class="filter-btn" data-rating="3">3 Stars</button>
+                <button class="filter-btn" data-rating="2">2 Stars</button>
+                <button class="filter-btn" data-rating="1">1 Star</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- All Reviews Section -->
+    <section class="all-reviews-section">
+        <div class="reviews-container">
+            <div class="reviews-grid" id="allReviewsGrid">
+                <!-- Reviews will be loaded here -->
+            </div>
+            
+            <div class="no-reviews" id="noReviewsMessage" style="display: none;">
+                <i class="fas fa-star"></i>
+                <h3>No reviews found</h3>
+                <p>No reviews match your current filter.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Back to Top Button -->
+    <button class="back-to-top" id="backToTopBtn" onclick="scrollToTop()">
+        <i class="fas fa-chevron-up"></i>
+    </button>
+
+    <!-- Scripts -->
+    <script src="js/loading.js"></script>
+    <script src="js/script.js"></script>
+    <script type="module" src="js/reviews.js"></script>
+</body>
+</html>

@@ -1,0 +1,47 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    
+    match /bookings/{booking} {
+      allow create: if true;
+      allow read, update, delete: if request.auth != null;
+    }
+    
+    match /reviews/{review} {
+      allow read: if resource.data.status == 'approved' || request.auth != null;
+      allow create: if true;
+      allow update, delete: if request.auth != null;
+    }
+    
+    match /newsletter/{subscriber} {
+      allow create: if true;
+      allow read: if true;
+      allow update: if request.auth != null || resource.data.status == 'unverified';
+      allow delete: if request.auth != null;
+    }
+    
+    match /adminCalendar/{date} {
+      allow read: if true;
+      allow write: if request.auth != null;
+    }
+    
+    match /gallery/{image} {
+      allow read: if true;
+      allow write: if request.auth != null;
+    }
+    
+    match /arDesigns/{design} {
+      allow read: if true;
+      allow write: if request.auth != null;
+    }
+    
+    match /settings/{setting} {
+      allow read: if true;
+      allow write: if request.auth != null;
+    }
+    
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

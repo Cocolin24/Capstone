@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AR Try-On Tattoo</title>
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <link rel="icon" type="image/png" href="admin/image/rplogo.png">
+  <link rel="stylesheet" href="css/loading.css">
+  <link rel="stylesheet" href="css/augmented-reality.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  
+  <style>
+    .access-loading {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: #1a1a1a;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      z-index: 10000;
+      color: white;
+    }
+    .loading-spinner {
+      border: 4px solid #333;
+      border-top: 4px solid #666;
+      border-radius: 50%;
+      width: 50px;
+      height: 50px;
+      animation: spin 1s linear infinite;
+      margin-bottom: 20px;
+    }
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    .ar-content {
+      display: none;
+    }
+    .ar-content.authorized {
+      display: block;
+    }
+  </style>
+</head>
+<body>
+
+<!-- Access Control Loading Screen -->
+<div id="accessLoading" class="access-loading">
+  <div class="loading-spinner"></div>
+  <p>Checking AR feature access...</p>
+</div>
+
+<!-- AR Content (hidden until authorized) -->
+<div id="arContent" class="ar-content">
+
+<!-- AR Feature Access Control -->
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.1/firebase-app.js";
+import {
+  getFirestore,
+  doc,
+  getDoc
+} from "https://www.gstatic.com/firebasejs/10.12.1/firebase-firestore.js";
+
+window.firebaseConfig = {
+  apiKey: "AIzaSyC5OGf8nc85I9cw1SQW65oJbSJDAtLLoW4",
+  authDomain: "realpainbooking.firebaseapp.com",
+  projectId: "realpainbooking",
+  storageBucket: "realpainbooking.firebasestorage.app",
+  messagingSenderId: "584949331159",
+  appId: "1:584949331159:web:8ea35b28ab22388871ec92"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
+// Check if AR feature is enabled
+async function checkARAccess() {
+  const loadingScreen = document.getElementById('accessLoading');
+  const arContent = document.getElementById('arContent');
+  
+  try {
+    console.log('Checking AR feature access...');
+    const arSettingsRef = doc(db, "settings", "arFeature");
+    const docSnap = await getDoc(arSettingsRef);
+    
+    let arEnabled = true; // Default to enabled
+    if (docSnap.exists()) {
+      arEnabled = docSnap.data().enabled;
+      console.log('AR setting found:', arEnabled);
+    } else {
+      console.log('No AR setting found, defaulting to enabled');
+    }
+    
+    if (!arEnabled) {
+      // AR is disabled, show message and redirect
+      loadingScreen.innerHTML = `
+        <div style="text-align: center;">
+          <i class="fas fa-ban" style="font-size: 4rem; color: #dc3545; margin-bottom: 20px;"></i>
+          <h2>AR Try-On Feature Disabled</h2>
+          <p>This feature is currently disabled by the administrator.</p>
+          <p>Redirecting to homepage in <span id="countdown">3</span> seconds...</p>
+        </div>
+      `;
+      
+      let countdown = 3;
+      const countdownEl = document.getElementById('countdown');
+      const countdownInterval = setInterval(() => {
+        countdown--;
+        if (countdownEl) countdownEl.textContent = countdown;
+        if (countdown <= 0) {
+          clearInterval(countdownInterval);
+          window.location.href = 'index.html';
+        }
+      }, 1000);
+      
+      return;
+    }
+    
+    // AR is enabled, show content
+    console.log('AR feature access granted');
+    loadingScreen.style.display = 'none';
+    arContent.classList.add('authorized');
+    
+  } catch (error) {
+    console.error('Error checking AR access:', error);
+    // On error, show error message and redirect
+    loadingScreen.innerHTML = `
+      <div style="text-align: center;">
+        <i class="fas fa-exclamation-triangle" style="font-size: 4rem; color: #ffc107; margin-bottom: 20px;"></i>
+        <h2>Connection Error</h2>
+        <p>Unable to verify AR feature status.</p>
+        <p>Redirecting to homepage...</p>
+      </div>
+    `;
+    
+    setTimeout(() => {
+      window.location.href = 'index.html';
+    }, 3000);
+  }
+}
+
+// Check access immediately when page loads
+checkARAccess();
+</script>
+
+  <!-- Top Bar -->
+  <div class="top-bar">
+    <button class="back-btn" onclick="goBack()">
+      <i class="fas fa-arrow-left"></i>
+      <span>Back</span>
+    </button>
+    
+    <div class="placement-selector">
+      <select id="tattooPlacement">
+        <option value="" disabled selected>Select Placement</option>
+        <option value="face">Face</option>
+        <option value="left-cheek">Left Cheek</option>
+        <option value="right-cheek">Right Cheek</option>
+        <option value="neck">Neck</option>
+        <option value="chest">Chest</option>
+        <option value="stomach">Stomach</option>
+        <option value="back">Back</option>
+        <option value="left-shoulder">Left Shoulder</option>
+        <option value="right-shoulder">Right Shoulder</option>
+        <option value="left-arm">Left Upper Arm</option>
+        <option value="right-arm">Right Upper Arm</option>
+        <option value="left-forearm">Left Forearm</option>
+        <option value="right-forearm">Right Forearm</option>
+        <option value="left-wrist">Left Wrist</option>
+        <option value="right-wrist">Right Wrist</option>
+        <option value="left-hand">Left Hand</option>
+        <option value="right-hand">Right Hand</option>
+        <option value="left-thigh">Left Thigh</option>
+        <option value="right-thigh">Right Thigh</option>
+        <option value="left-calf">Left Calf</option>
+        <option value="right-calf">Right Calf</option>
+        <option value="left-ankle">Left Ankle</option>
+        <option value="right-ankle">Right Ankle</option>
+      </select>
+    </div>
+  </div>
+
+  <!-- Camera Feed Container -->
+  <div class="camera-container">
+    <video id="cameraFeed" autoplay playsinline muted></video>
+    <img id="tattooOverlay" src="" alt="Tattoo Overlay" crossorigin="anonymous" style="display:none;">
+  </div>
+
+  <!-- Size Control (Left Side) -->
+  <div class="size-control">
+    <label for="tattooSize">SIZE</label>
+    <input type="range" id="tattooSize" min="50" max="5000" value="150" orient="vertical">
+  </div>
+
+  <!-- Camera Toggle (Left Side) -->
+  <div class="camera-toggle-container">
+    <button class="control-btn camera-toggle-btn" onclick="toggleCamera()" title="Switch Camera">
+      <i class="fas fa-camera-rotate"></i>
+    </button>
+  </div>
+
+  <!-- Take Picture Button (Center) -->
+  <div class="side-controls">
+    <button class="control-btn camera-btn" onclick="takeScreenshot()" title="Take Screenshot">
+      <i class="fas fa-camera"></i>
+    </button>
+  </div>
+
+  <!-- Bottom Filter Bar -->
+  <div class="filter-bar" id="filterBar">
+    <div class="filter-item upload-btn" id="uploadBtn">
+      <i class="fas fa-plus"></i>
+    </div>
+    <!-- Designs will be loaded dynamically from Firebase -->
+  </div>
+  
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.1/firebase-app.js";
+    import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/10.12.1/firebase-firestore.js";
+    
+    // Initialize Firebase for AR designs with the same config
+    const arApp = initializeApp(window.firebaseConfig, 'ar-designs');
+    const arDb = getFirestore(arApp);
+    
+    function loadARDesigns() {
+      console.log('loadARDesigns called');
+      const filterBar = document.getElementById('filterBar');
+      console.log('filterBar element:', filterBar);
+      
+      if (!filterBar) {
+        console.error('filterBar element not found!');
+        return;
+      }
+      
+      // Try to load Firebase designs first
+      getDocs(collection(arDb, 'arDesigns')).then(querySnapshot => {
+        console.log('Firebase query successful, found', querySnapshot.size, 'documents');
+        
+        if (querySnapshot.size > 0) {
+          // Load Firebase designs (ImgBB tattoos)
+          querySnapshot.forEach((doc) => {
+            const data = doc.data();
+            console.log('Processing Firebase document:', doc.id, data);
+            if (data.enabled !== false && data.imageUrl) {
+              console.log('Adding Firebase tattoo:', data.imageUrl);
+              const img = document.createElement('img');
+              img.src = data.imageUrl;
+              img.className = 'filter-item';
+              img.title = data.name || 'Custom Tattoo';
+              img.onclick = function() { 
+                console.log('Firebase tattoo clicked:', this.src);
+                window.setTattoo(this.src, this); 
+              };
+              filterBar.appendChild(img);
+            }
+          });
+        } else {
+          // No Firebase designs, load defaults
+          loadDefaultDesigns(filterBar);
+        }
+        
+        // Load saved images from localStorage after Firebase/default designs
+        if (window.loadSavedImages) {
+          window.loadSavedImages();
+        }
+        
+        console.log('Total children in filterBar:', filterBar.children.length);
+      }).catch(error => {
+        console.error('Firebase error:', error);
+        // Firebase failed, load defaults
+        loadDefaultDesigns(filterBar);
+        // Load saved images from localStorage after defaults
+        if (window.loadSavedImages) {
+          window.loadSavedImages();
+        }
+      });
+    }
+    
+    function loadDefaultDesigns(filterBar) {
+      console.log('Loading default designs as fallback');
+      const defaultDesigns = [
+        'virtual-reality/cross-removebg-preview.png',
+        'virtual-reality/dragonoriental-removebg-preview.png',
+        'virtual-reality/japaneselovesymbol-removebg-preview.png',
+        'virtual-reality/mandala-removebg-preview.png',
+        'virtual-reality/polynesian-removebg-preview.png',
+        'virtual-reality/tigerhead-removebg-preview.png',
+        'virtual-reality/wolfhead-removebg-preview.png',
+        'virtual-reality/chest-tattoo.png'
+      ];
+      
+      defaultDesigns.forEach((src, index) => {
+        console.log('Creating default image', index + 1, ':', src);
+        const img = document.createElement('img');
+        img.src = src;
+        img.className = 'filter-item';
+        img.onclick = function() { 
+          console.log('Default tattoo clicked:', this.src);
+          window.setTattoo(this.src, this); 
+        };
+        filterBar.appendChild(img);
+      });
+    }
+    
+    // Load tattoos when page is ready
+    document.addEventListener('DOMContentLoaded', loadARDesigns);
+  </script>
+
+  <!-- Screenshot Confirmation Modal -->
+  <div id="screenshotModal" class="screenshot-modal">
+    <div class="modal-content">
+      <img id="screenshotPreview" class="modal-preview" alt="Screenshot Preview">
+      <div class="modal-buttons">
+        <button class="modal-btn save" onclick="saveScreenshot()">
+          <i class="fas fa-download"></i> Save
+        </button>
+        <button class="modal-btn discard" onclick="discardScreenshot()">
+          <i class="fas fa-times"></i> Discard
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/loading.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@3.18.0"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/pose-detection"></script>
+  <script src="js/augmented-reality.js"></script>
+
+</div> <!-- Close AR Content -->
+
+</body>
+</html>

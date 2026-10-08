@@ -1,0 +1,663 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  overflow: hidden;
+  background: #000;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+  -webkit-tap-highlight-color: transparent;
+  color: #fff;
+}
+
+.camera-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #000;
+  pointer-events: none;
+}
+
+#cameraFeed {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  background: #000;
+  pointer-events: auto;
+  transition: opacity 0.3s ease;
+}
+
+#cameraFeed.front-camera {
+  transform: scaleX(-1);
+}
+
+#tattooOverlay {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 25vw;
+  max-width: none !important;
+  max-height: none !important;
+  height: auto;
+  transform: translate3d(-50%, -50%, 0);
+  opacity: 0.55;
+  mix-blend-mode: darken;
+  cursor: move;
+  user-select: none;
+  transition: opacity 0.3s ease, filter 0.4s ease, box-shadow 0.3s ease, mix-blend-mode 0.3s ease;
+  z-index: 10;
+  pointer-events: auto;
+  will-change: transform, opacity, filter, perspective;
+  backface-visibility: hidden;
+  transform-style: preserve-3d;
+  perspective: 1000px;
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: crisp-edges;
+  border: none;
+  outline: none;
+  box-shadow: none;
+}
+
+
+#tattooOverlay.front-camera {
+  transform: translate3d(-50%, -50%, 0) scaleX(-1);
+}
+
+.top-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  padding: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 100;
+  background: linear-gradient(to bottom, rgba(0,0,0,0.5), transparent);
+  pointer-events: auto;
+}
+
+.back-btn {
+  background: #fff;
+  color: #000;
+  border: none;
+  padding: 10px 18px;
+  font-size: 15px;
+  border-radius: 50px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.2s ease;
+  font-weight: 600;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+}
+
+.back-btn:hover {
+  transform: scale(1.05);
+}
+
+.back-btn:active {
+  transform: scale(0.98);
+}
+
+.placement-selector {
+  background: #fff;
+  color: #000;
+  padding: 10px 18px;
+  border-radius: 50px;
+  font-size: 14px;
+  border: none;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+}
+
+.placement-selector select {
+  background: transparent;
+  color: #000;
+  border: none;
+  font-size: 14px;
+  cursor: pointer;
+  outline: none;
+  font-weight: 600;
+}
+
+.placement-selector select option {
+  background: #fff;
+  color: #000;
+}
+
+.side-controls {
+  position: fixed;
+  left: 50%;
+  bottom: 100px;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: row;
+  gap: 15px;
+  z-index: 90;
+  pointer-events: auto;
+  align-items: center;
+}
+
+.camera-toggle-container {
+  position: fixed;
+  left: 20px;
+  bottom: 100px;
+  z-index: 1000;
+  pointer-events: auto;
+}
+
+.control-btn {
+  width: 50px;
+  height: 50px;
+  background: #fff;
+  border: none;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+  font-size: 20px;
+  color: #000;
+}
+
+.control-btn:hover {
+  transform: scale(1.1);
+}
+
+.control-btn:active {
+  transform: scale(0.95);
+}
+
+.control-btn.camera-btn {
+  width: 70px;
+  height: 70px;
+  background: linear-gradient(135deg, #fff 0%, #f0f0f0 100%);
+  box-shadow: 0 6px 16px rgba(0,0,0,0.4);
+  font-size: 24px;
+}
+
+.control-btn.camera-toggle-btn {
+  background: rgba(255, 255, 255, 0.95);
+  color: #333;
+  font-size: 16px;
+  border: 2px solid rgba(255, 255, 255, 0.5);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+  cursor: pointer;
+  pointer-events: auto;
+  z-index: 1000;
+  position: relative;
+}
+
+.control-btn.camera-toggle-btn:hover {
+  background: rgba(255, 255, 255, 1);
+  transform: scale(1.1);
+  border-color: rgba(255, 255, 255, 0.8);
+}
+
+.control-btn.camera-toggle-btn:active {
+  background: rgba(255, 255, 255, 0.9);
+  transform: scale(0.95);
+}
+
+.control-btn i {
+  pointer-events: none;
+}
+
+.size-control {
+  position: fixed;
+  left: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+  z-index: 90;
+  pointer-events: auto;
+}
+
+.size-control label {
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+  color: #fff;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+}
+
+.size-control input[type="range"] {
+  -webkit-appearance: slider-vertical;
+  width: 8px;
+  height: 200px;
+  background: rgba(255,255,255,0.3);
+  border-radius: 10px;
+  outline: none;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+}
+
+.size-control input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 24px;
+  height: 24px;
+  background: #fff;
+  border-radius: 50%;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.4);
+}
+
+.size-control input[type="range"]::-moz-range-thumb {
+  width: 24px;
+  height: 24px;
+  background: #fff;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.4);
+}
+
+.filter-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  gap: 12px;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  z-index: 100;
+  pointer-events: auto;
+}
+
+.filter-bar::-webkit-scrollbar {
+  display: none;
+}
+
+.filter-item {
+  flex-shrink: 0;
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+  border-radius: 12px;
+  cursor: pointer;
+  border: 3px solid transparent;
+  background: rgba(255,255,255,0.1);
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+  pointer-events: auto;
+}
+
+.filter-item:hover {
+  transform: scale(1.1);
+  border-color: #fff;
+}
+
+.filter-item:active {
+  transform: scale(1.05);
+}
+
+.upload-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #fff;
+  color: #000;
+  font-size: 24px;
+}
+
+.flash-effect {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: #fff;
+  opacity: 0;
+  pointer-events: none;
+  z-index: 9999;
+  animation: flash 0.3s ease;
+}
+
+@keyframes flash {
+  0% { opacity: 0; }
+  50% { opacity: 0.8; }
+  100% { opacity: 0; }
+}
+
+.screenshot-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.95);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 99999;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.screenshot-modal.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.modal-content {
+  background: #1a1a1a;
+  border-radius: 20px;
+  padding: 30px;
+  max-width: 90%;
+  max-height: 90vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+  animation: slideUp 0.3s ease;
+}
+
+@keyframes slideUp {
+  from { transform: translateY(30px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+.modal-preview {
+  max-width: 100%;
+  max-height: 60vh;
+  border-radius: 12px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+}
+
+.modal-buttons {
+  display: flex;
+  gap: 15px;
+  width: 100%;
+  max-width: 400px;
+}
+
+.modal-btn {
+  flex: 1;
+  padding: 14px 24px;
+  border: none;
+  border-radius: 50px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.modal-btn:active {
+  transform: scale(0.98);
+}
+
+.modal-btn.save {
+  background: #fff;
+  color: #000;
+}
+
+.modal-btn.save:hover {
+  background: #f0f0f0;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
+}
+
+.modal-btn.discard {
+  background: transparent;
+  color: #fff;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+}
+
+.modal-btn.discard:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.5);
+}
+
+@media screen and (max-width: 480px) {
+  .modal-content {
+    padding: 20px;
+    gap: 15px;
+  }
+
+  .modal-buttons {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .modal-btn {
+    padding: 12px 20px;
+    font-size: 14px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .camera-container {
+    width: 100%;
+    height: 100vh;
+  }
+
+  #cameraFeed {
+    width: 100%;
+    height: 100vh;
+    object-fit: cover;
+  }
+
+  #tattooOverlay {
+    width: 35vw;
+  }
+
+  .top-bar {
+    padding: 15px;
+  }
+
+  .back-btn {
+    padding: 8px 14px;
+    font-size: 14px;
+  }
+
+  .back-btn span {
+    display: none;
+  }
+
+  .placement-selector {
+    padding: 8px 14px;
+    font-size: 13px;
+  }
+
+  .side-controls {
+    position: fixed;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 90px;
+    top: auto;
+    flex-direction: row;
+    gap: 12px;
+    align-items: center;
+  }
+
+  .camera-toggle-container {
+    left: 15px;
+    bottom: 90px;
+  }
+
+  .control-btn {
+    width: 50px;
+    height: 50px;
+    font-size: 18px;
+  }
+
+  .control-btn.camera-btn {
+    width: 64px;
+    height: 64px;
+  }
+
+  .control-btn.camera-toggle-btn {
+    font-size: 14px;
+  }
+
+  .size-control {
+    position: fixed;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 185px;
+    top: auto;
+    flex-direction: row;
+    width: 90%;
+    max-width: 400px;
+    background: rgba(255,255,255,0.15);
+    backdrop-filter: blur(10px);
+    padding: 12px 20px;
+    border-radius: 50px;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.3);
+  }
+
+  .size-control label {
+    writing-mode: horizontal-tb;
+    text-orientation: mixed;
+    font-size: 11px;
+    white-space: nowrap;
+  }
+
+  .size-control input[type="range"] {
+    -webkit-appearance: none;
+    width: 100%;
+    height: 6px;
+    background: rgba(255,255,255,0.3);
+    border-radius: 10px;
+    outline: none;
+    cursor: pointer;
+    box-shadow: none;
+  }
+
+  .size-control input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 22px;
+    height: 22px;
+    background: #fff;
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.4);
+  }
+
+  .size-control input[type="range"]::-moz-range-thumb {
+    width: 22px;
+    height: 22px;
+    background: #fff;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.4);
+  }
+
+  .filter-bar {
+    padding: 15px;
+    gap: 10px;
+  }
+
+  .filter-item {
+    width: 55px;
+    height: 55px;
+  }
+
+  .upload-btn {
+    font-size: 20px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .top-bar {
+    padding: 12px;
+  }
+
+  .back-btn {
+    padding: 8px 12px;
+    font-size: 13px;
+  }
+
+  .placement-selector {
+    padding: 8px 12px;
+    font-size: 12px;
+  }
+
+  .side-controls {
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 80px;
+    gap: 10px;
+    flex-direction: row;
+    align-items: center;
+  }
+
+  .camera-toggle-container {
+    left: 12px;
+    bottom: 100px;
+  }
+
+  .control-btn {
+    width: 48px;
+    height: 48px;
+    font-size: 16px;
+  }
+
+  .control-btn.camera-btn {
+    width: 60px;
+    height: 60px;
+  }
+
+  .control-btn.camera-toggle-btn {
+    font-size: 12px;
+  }
+
+  .size-control {
+    bottom: 165px;
+    width: 85%;
+    padding: 10px 16px;
+  }
+
+  .size-control label {
+    font-size: 10px;
+  }
+
+  .filter-bar {
+    padding: 12px;
+  }
+
+  .filter-item {
+    width: 50px;
+    height: 50px;
+  }
+}

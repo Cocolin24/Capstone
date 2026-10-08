@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Book An Appointment</title>
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <link rel="icon" type="image/png" href="admin/image/rplogo.png">
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="css/loading.css">
+  <link rel="stylesheet" href="css/book-now.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/intl-tel-input@19.5.6/build/css/intlTelInput.css" />
+</head>
+
+<body>
+  <!-- Back Button -->
+  <a href="index.html" class="back-btn">Back</a>
+
+  <!-- Booking Section -->
+  <section id="book-now" class="book-now-section">
+    <h1>BOOK A SESSION!</h1>
+    <p class="subtext">This isn’t just a booking — it’s the start of your next masterpiece.</p>
+
+    <div class="booking-layout">
+      <!-- Booking Form -->
+      <form class="booking-form" id="clientBookingForm">
+        <!-- User Info -->
+        <div class="user-info">
+          <input type="text" id="clientName" placeholder="Name" required />
+          <span class="name-error-message" id="nameError" style="display: none !important;">Name must be 30 characters or less.</span>
+          <input type="email" id="clientEmail" placeholder="E-mail" required />
+          <span class="name-error-message" id="emailError" style="display: none !important;">Please enter a valid email address.</span>
+          <div class="newsletter-checkbox-wrapper">
+            <input type="checkbox" id="newsletterSubscribe" />
+            <label for="newsletterSubscribe">Subscribe to our newsletter for future discounts and offer</label>
+          </div>
+          <div class="phone-input-wrapper">
+            <input type="tel" id="clientContact" placeholder="9683060939" required />
+            <span class="name-error-message" id="contactError" style="display: none !important;">Please enter a valid phone number.</span>
+          </div>
+        </div>
+
+        <!-- Upload Image --> 
+        <label class="upload-label">Upload your design here</label>
+        <div class="upload-box">
+          <!-- hidden input -->
+          <input type="file" id="tattooUpload" accept="image/*" hidden />
+
+          <!-- clickable area -->
+          <label for="tattooUpload" class="upload-area">
+            <i class="fas fa-image"></i>
+            <p>Click here or drop file</p>
+          </label>
+
+          <!-- preview (hidden by default) -->
+          <img id="previewImage" style="display:none; max-width:200px; margin-top:10px; border-radius:10px;" />
+        </div>
+
+
+        <!-- Dropdowns -->
+        <div class="dropdown-row">
+          <div class="dropdown">
+            <label for="bookingType">Type of Booking</label>
+            <select id="bookingType" required>
+              <option value="">Please select</option>
+              <option value="studio">Studio</option>
+              <option value="home-service">Home Service</option>
+            </select> 
+          </div>
+
+          <div class="dropdown">
+            <label for="paymentMethod">Mode of Payment</label>
+            <!-- Main Dropdown -->
+            <select id="paymentMethod" required>
+              <option value="">Please select </option>
+              <option value="cash">Cash</option>
+              <option value="ewallet">E-Wallet</option>
+              <option value="bank">Bank Transfer</option>
+              <option value="debit-card">Debit/Credit Card</option>
+            </select>
+          </div>
+
+          <div class="dropdown sub-dropdown" id="ewalletOptions" style="display:none;">
+            <label>Select E-Wallet</label>
+            <div class="chip-group" data-group="ewallet">
+              <button type="button" class="chip" data-value="gcash">
+                <img src="gallery/gcash.webp" alt="Gcash" class="chip-logo">
+                Gcash
+              </button>
+              <button type="button" class="chip" data-value="maya">
+                <img src="gallery/maya.webp" alt="Maya" class="chip-logo">
+                Maya
+              </button>
+            </div>
+          </div>
+
+          <div class="dropdown sub-dropdown" id="bankOptions" style="display:none;">
+            <label>Select Bank</label>
+            <div class="chip-group" data-group="bank">
+              <button type="button" class="chip" data-value="bpi">
+                <img src="gallery/bpi.webp" alt="BPI" class="chip-logo">
+                BPI
+              </button>
+              <button type="button" class="chip" data-value="unionbank">
+                <img src="gallery/ub.webp" alt="UnionBank" class="chip-logo">
+                UnionBank
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Notes -->
+        <label for="notes">Additional message / note</label>
+        <textarea id="notes" placeholder="Placement, size, style, etc.." rows="4"></textarea>
+
+        <!-- Calendar Section -->
+        <div class="calendar-section">
+          <label for="booking-date">Choose a Date:</label>
+          <input type="text" id="booking-date" name="booking-date" class="flatpickr-input" placeholder="Select a date" required />
+        </div>
+
+      <!-- Time Slot Section -->
+        <div class="timeslot-section" id="timeslot-section" style="display: none;">
+          <p>Select a Time Slot</p>
+          <div class="timeslot-container">
+            <!-- Time slots will be dynamically generated by JavaScript -->
+          </div>
+        </div>
+        <div class="form-group recaptcha-container">
+          <div class="g-recaptcha" data-sitekey="6Lfz8wIsAAAAALEAZmY07hu0sdG7DQd5hJ_XT-r3" data-callback="onRecaptchaSuccess" data-theme="dark">
+          </div>
+          <span class="recaptcha-error-message" id="recaptchaError" 
+          style="display: none; color: #ff4444; font-size: 14px; margin-top: 5px;">Please complete the reCAPTCHA verification.</span>
+        </div>
+        <!-- Submit Button -->
+        <div class="form-group">
+          <button type="submit">Proceed Payment</button>
+        </div>
+        <p class="disclaimer">*Don't forget to present your valid ID on your appointment.</p>
+        <p class="disclaimer">*By submitting this form, you agree to our booking terms and policies.</p>
+      </form>
+    </div>
+  </section>
+
+  <!-- Toast Notification -->
+  <div id="toast" class="toast">
+    Your appointment request has been sent to admin for approval
+  </div>
+
+  <!-- Newsletter Notification Modal -->
+  <div id="newsletterModal" class="modal-overlay" style="display: none;">
+    <div class="modal-content">
+      <button class="modal-close" onclick="document.getElementById('newsletterModal').style.display='none'">&times;</button>
+      <div style="text-align: center; margin-bottom: 20px;">
+        <div style="width: 80px; height: 80px; margin: 0 auto 20px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 40px;">
+          📧
+        </div>
+      </div>
+      <h2>Newsletter Subscription</h2>
+      <div class="terms-text" style="text-align: center;">
+        <p style="font-size: 1.1rem; margin-bottom: 15px;">Thank you for subscribing to our newsletter!</p>
+        <p style="color: rgba(255, 255, 255, 0.8); line-height: 1.6;">
+          You will receive a verification email shortly. Please check your inbox (and spam folder) and click the verification link to complete your subscription.
+        </p>
+        <p style="color: rgba(255, 255, 255, 0.7); font-size: 0.9rem; margin-top: 20px;">
+          Once verified, you'll receive exclusive discounts, special offers, and studio updates!
+        </p>
+      </div>
+      <div class="modal-actions">
+        <button id="newsletterModalBtn" style="width: 100%; padding: 14px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border: none; border-radius: 8px; font-size: 1rem; font-weight: 600; cursor: pointer; transition: all 0.3s; box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);">
+          Continue to Payment
+        </button>
+        <style>
+          #newsletterModalBtn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
+          }
+          #newsletterModalBtn:active {
+            transform: translateY(0);
+          }
+        </style>
+      </div>
+    </div>
+  </div>
+
+  <!-- Terms and Conditions Modal -->
+  <div id="termsModal" class="modal-overlay" style="display: none;">
+    <div class="modal-content">
+      <button class="modal-close" onclick="document.getElementById('termsModal').style.display='none'">&times;</button>
+      <h2>Terms and Conditions</h2>
+      <div class="terms-text">
+        <h3>Booking Policy</h3>
+        <p>By proceeding with this booking, you agree to the following terms and conditions:</p>
+        
+        <h4>1. Appointment Confirmation</h4>
+        <p>Your booking request will be reviewed by our admin team. You will receive a confirmation once your appointment is approved.</p>
+        
+        <h4>2. Payment Terms</h4>
+        <p>A deposit or full payment may be required to secure your appointment. Payment details will be provided upon booking confirmation.</p>
+        
+        <h4>3. Cancellation Policy</h4>
+        <p>Cancellations must be made at least 24 hours in advance. Late cancellations may result in forfeiture of deposit.</p>
+        
+        <h4>4. Valid Identification</h4>
+        <p>You must present a valid government-issued ID on your appointment date for verification purposes.</p>
+        
+        <h4>5. Health and Safety</h4>
+        <p>Please inform us of any allergies, skin conditions, or health concerns that may affect the tattoo procedure.</p>
+        
+        <h4>6. Design Approval</h4>
+        <p>Final design approval must be done before the tattoo session begins. Changes during the session may incur additional charges.</p>
+        
+        <h4>7. Aftercare Instructions</h4>
+        <p>You are responsible for following proper aftercare instructions provided by the artist to ensure optimal healing.</p>
+        
+        <h4>8. Age Requirement</h4>
+        <p>You must be at least 18 years old or have parental consent to receive a tattoo.</p>
+      </div>
+      
+      <div class="agreement-section">
+        <div class="checkbox-wrapper">
+          <input type="checkbox" id="termsCheckbox" />
+          <label for="termsCheckbox">I have read and agree to the Terms and Conditions</label>
+        </div>
+      </div>
+      <div class="modal-actions">
+        <button id="finalSubmitBtn" disabled>Confirm Booking</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="js/loading.js"></script>
+  <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+  <script src="https://cdn.jsdelivr.net/npm/intl-tel-input@19.5.6/build/js/intlTelInput.min.js"></script>
+  <script type="module" src="js/booking.js"></script>
+</body>
+</html>
+  

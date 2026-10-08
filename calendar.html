@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Availability - Real Pain Tattoo Studio</title>
+        <link rel="icon" type="image/x-icon" href="favicon.ico">
+        <link rel="icon" type="image/png" href="admin/image/rplogo.png">
+        <link rel="stylesheet" href="css/loading.css">
+        <link rel="stylesheet" href="css/calendar.css"> 
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+    </head>
+    <body>
+      <header>
+        <div class="logo">
+            <a href="index.html" style="display: flex; align-items: center; gap: 1rem; text-decoration: none; color: inherit;">
+                <img src="admin/image/rplogo.png" alt="Real Pain Logo">
+                <div class="title">
+                    <h1>REAL PAIN</h1>
+                    <p>TATTOO STUDIO</p>
+                </div>
+            </a>
+        </div>
+        <div class="hamburger-menu" onclick="toggleMenu()">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <nav class="nav-menu">
+            <ul>
+                <li><a href="index.html">HOME</a></li>
+                <li><a href="index.html#about">ABOUT</a></li>
+                <li><a href="index.html#gallery-preview">GALLERY</a></li>
+                <li><a href="calendar.html">AVAILABILITY</a></li>
+                <li><a href="index.html#reviews">REVIEWS</a></li>
+                <li><a href="index.html#contact">CONTACT</a></li>
+            </ul>
+        </nav>
+      </header>
+
+        <!-- Hero Section -->
+        <section class="availability-hero">
+            <div class="hero-overlay">
+                <h1>CHECK OUR AVAILABILITY</h1>
+                <p>Book your next masterpiece with Real Pain Tattoo Studio</p>
+                <div class="hero-stats">
+                    <div class="stat">
+                        <i class="fas fa-clock"></i>
+                        <span>Open 7 Days</span>
+                    </div>
+                    <div class="stat">
+                        <i class="fas fa-calendar-check"></i>
+                        <span>Same Day Bookings</span>
+                    </div>
+                    <div class="stat">
+                        <i class="fas fa-users"></i>
+                        <span>Expert Artists</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Scroll Indicator -->
+            <div class="scroll-indicator" onclick="scrollToAvailability()">
+                <div class="scroll-text">SCROLL DOWN</div>
+                <div class="scroll-arrow">
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+            </div>
+        </section>
+
+        <!-- Main Availability Section -->
+        <section class="availability-main">
+            <div class="availability-container">
+                <div class="section-header">
+                    <h2>ARTIST AVAILABILITY</h2>
+                    <p>Select a date to see available time slots</p>
+                </div>
+
+                <div class="calendar-wrapper">
+                    <div class="calendar-container">
+                        <div class="calendar-header">
+                            <button class="nav-btn prev-month">
+                                <i class="fas fa-chevron-left"></i>
+                            </button>
+                            <span class="month-year"></span>
+                            <button class="nav-btn next-month">
+                                <i class="fas fa-chevron-right"></i>
+                            </button>
+                        </div>
+                        <div class="calendar-weekdays">
+                            <span>SUN</span>
+                            <span>MON</span>
+                            <span>TUE</span>
+                            <span>WED</span>
+                            <span>THU</span>
+                            <span>FRI</span>
+                            <span>SAT</span>
+                        </div>
+                        <div class="calendar-grid"></div>
+                    </div>
+
+                    <div class="time-slots">
+                        <h3>Available Time Slots</h3>
+                        <div class="selected-date">Select a date to view available slots</div>
+                        <div class="slots-container">
+                            <!-- Time slots will be populated here -->
+                        </div>
+                        <button class="book-now-btn">
+                            <i class="fas fa-calendar-plus"></i>
+                            Book Selected Slot
+                        </button>
+                    </div>
+                </div>
+
+                <div class="availability-info">
+                    <div class="legend">
+                        <h4>Legend:</h4>
+                        <div class="legend-items">
+                            <span class="legend-item available">
+                                <i class="fas fa-circle"></i>
+                                Available
+                            </span>
+                            <span class="legend-item partially-booked">
+                                <i class="fas fa-circle"></i>
+                                Few Slots Left
+                            </span>
+                            <span class="legend-item booked">
+                                <i class="fas fa-circle"></i>
+                                Fully Booked
+                            </span>
+                            <span class="legend-item closed">
+                                <i class="fas fa-circle"></i>
+                                Closed
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="booking-info">
+                        <h4>Booking Information:</h4>
+                        <ul>
+                            <li><i class="fas fa-info-circle"></i> Walk-ins welcome based on availability</li>
+                            <li><i class="fas fa-credit-card"></i> ₱500 minimum deposit required</li>
+                            <li><i class="fas fa-clock"></i> Sessions typically 2-6 hours</li>
+                            <li><i class="fas fa-phone"></i> Call us for same-day appointments</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section class="quick-contact">
+            <div class="contact-content">
+                <h3>Ready to Book?</h3>
+                <p>Contact us directly for faster booking or consultation</p>
+                <div class="contact-buttons">
+                    <a href="tel:09610844733" class="contact-btn phone" id="callBtn">
+                        <i class="fas fa-phone"></i>
+                        <span class="btn-text">Call Now</span>
+                    </a>
+                    <a href="https://www.facebook.com/realpainstudio" target="_blank" class="contact-btn facebook">
+                        <i class="fab fa-facebook-messenger"></i>
+                        Message Us
+                    </a>
+                    <a href="book-now.html" class="contact-btn book">
+                        <i class="fas fa-calendar-plus"></i>
+                        Book Online
+                    </a>
+                </div>
+                <div class="phone-number-display" id="phoneDisplay" style="display: none; margin-top: 1rem; padding: 1rem; background: rgba(255,255,255,0.1); border-radius: 10px;">
+                    <p style="margin: 0; font-size: 1.1rem;">
+                        <i class="fas fa-phone"></i> 
+                        <span id="phoneNumber">0961 084 4733</span>
+                        <button onclick="copyPhoneNumber()" class="copy-btn" style="margin-left: 10px; padding: 5px 15px; background: #fff; color: #000; border: none; border-radius: 5px; cursor: pointer;">
+                            <i class="fas fa-copy"></i> Copy
+                        </button>
+                    </p>
+                </div>
+            </div>
+        </section>
+        <script src="js/loading.js"></script>
+        <script src="js/script.js"></script>
+        <script type="module" src="js/calendar.js"></script>
+        
+        <script>
+            function isMobileDevice() {
+                return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+            }
+            
+            function copyPhoneNumber() {
+                const phoneNumber = document.getElementById('phoneNumber').textContent;
+                navigator.clipboard.writeText(phoneNumber).then(() => {
+                    alert('Phone number copied to clipboard: ' + phoneNumber);
+                }).catch(() => {
+                    alert('Could not copy. Here is the number: ' + phoneNumber);
+                });
+            }
+            
+            document.addEventListener('DOMContentLoaded', () => {
+                const callBtn = document.getElementById('callBtn');
+                const phoneDisplay = document.getElementById('phoneDisplay');
+                
+                if (!isMobileDevice()) {
+                    callBtn.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        phoneDisplay.style.display = 'block';
+                    });
+                }
+            });
+        </script>
+    </body>
+</html>
